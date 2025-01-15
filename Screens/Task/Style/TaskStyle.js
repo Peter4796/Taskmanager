@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     },
     notiImg:{
         width:25,
-        height:25
+        height:25,
     },
     calenderView:{
         flex:1,

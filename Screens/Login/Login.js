@@ -30,7 +30,7 @@ import { styles } from './Style/LoginStyle'
 
         <Text style={styles.forgetText}>Forget Password</Text>
         <TouchableOpacity style={styles.btn} onPress={gotoHome}>
-            <Text style={styles.btnText}>Sign in</Text>
+            <Text style={styles.btnText}>Login</Text>
         </TouchableOpacity>
         <Text style={styles.contiueText}>or contiue with</Text>
       </View>

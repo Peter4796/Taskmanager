@@ -5,7 +5,7 @@ import { styles } from './Style/InitialScreenStyle'
 
 export default function InitialScreen({navigation}) {
   const gotToLogin = () => {
-    navigation.navigate("Login")
+    navigation.navigate("Auth")
   } 
   return (
     <>

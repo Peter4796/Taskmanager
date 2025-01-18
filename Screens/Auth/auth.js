@@ -8,7 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import React, {useState} from 'react';
-import {styles} from './Style/RegistrationStyle';
+import {styles} from './Style/authStyle';
 import {
   LoginImg,
   UserImg,
@@ -18,31 +18,57 @@ import {
   PasswordImg,
   InboxImg,
 } from '../../theme/Images';
-import Icon from '../../src/components/common/icon';
 
-export default function Registration({navigation}) {
+export default function Auth({navigation}) {
   const initialInputs = {
-    firstName: { label: 'First Name', value: '' },
-        lastName: { label: 'Last Name', value: '' },
+    firstName: {label: 'First Name', value: ''},
+    lastName: {label: 'Last Name', value: ''},
     username: {label: 'Username', value: ''},
     email: {label: 'Email', value: ''},
     password: {label: 'Password', value: ''},
   };
   const [state, setState] = useState({
-    ...initialInputs,
+    inputs: [
+      {
+        placeholder: 'First Name',
+        value: 'Peter',
+        field: 'firstName',
+        error: null,
+      },
+      {
+        placeholder: 'Last Name',
+        value: 'Gitahi',
+        field: 'lastName',
+        error: null,
+      },
+      {
+        placeholder: 'Username',
+        value: 'Peter4796',
+        field: 'username',
+        error: null,
+      },
+      {
+        placeholder: 'Email',
+        value: 'Peter4796@gmail.com',
+        field: 'email',
+        error: null,
+      },
+      {placeholder: 'Password', value: '', field: 'password', error: null},
+    ],
     page: 'Sign up',
   });
-  const {page} = state;
+  const {page, inputs} = state;
   const gotToSignin = () => {
     setState({
       ...state,
       page: page === 'Sign up' ? 'Login' : 'Sign up',
     });
   };
-  const displayInputs =
+  const setInputs =
     page === 'Sign up'
-      ? ['firstName', 'lastName','username', 'email', 'password']
+      ? ['firstName', 'lastName', 'username', 'email', 'password']
       : ['email', 'password'];
+  const displayInputs = inputs.filter(input => setInputs.includes(input.field));
   return (
     <View style={styles.loginContainer}>
       <SafeAreaView />
@@ -51,9 +77,17 @@ export default function Registration({navigation}) {
         <Text style={styles.welComeText}>
           {page === 'Sign up' ? 'Sign up' : 'Login'}
         </Text>
-        {displayInputs.map((input, index) => (
+        {displayInputs.map(({placeholder, value, field, error}, index) => (
           <View key={index} style={styles.loginInputView}>
-            <TextInput placeholder={input} style={styles.loginInput} />
+            <TextInput
+              placeholder={
+                field === 'email' && page === 'Login'
+                  ? 'Email or Username'
+                  : placeholder
+              }
+              placeholderTextColor="black"
+              style={styles.loginInput}
+            />
           </View>
         ))}
         <TouchableOpacity style={styles.btn}>
